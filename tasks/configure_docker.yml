@@ -1,0 +1,17 @@
+---
+- name: Crée les répertoires de docker
+  file:
+    state: directory
+    path: "{{item}}"
+    mode: 0700
+  with_items:
+    - "{{docker.data_root}}"
+    - /etc/docker
+
+- name: Dépose la configuration docker
+  template:
+    src: daemon.json
+    dest: "/etc/docker/daemon.json"
+    mode: 0644
+  notify: restart docker
+

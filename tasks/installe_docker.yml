@@ -1,0 +1,13 @@
+---
+- name: Dépose la configuration yum
+  template:
+    src: docker.repo
+    dest: "/etc/yum.repos.d/docker.repo"
+    mode: 0644
+
+
+- name: Installation des paquets docker
+  yum:
+    name: ['docker-ce', 'docker-ce-cli', 'containerd.io']
+    state: latest
+  notify: restart docker

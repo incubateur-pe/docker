@@ -1,0 +1,19 @@
+---
+- assert:
+    fail_msg: "Ce role ne prends en charge que CentOS"
+    that:
+      - ansible_distribution == "CentOS"
+
+- name: Installation de docker
+  include_tasks: installe_docker.yml
+
+- name: Configuration de docker
+  include_tasks: configure_docker.yml
+
+- meta: flush_handlers
+
+- name: "Vérifie que docker est démarré"
+  systemd:
+    name: "docker"
+    enabled: yes
+    state: started
