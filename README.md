@@ -1,38 +1,41 @@
-Role Name
+docker-bare-metal
 =========
 
-A brief description of the role goes here.
+Installe docker sur un serveur ou une vm
 
-Requirements
+Pré-requis
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+La machine doit disposer des AC de la PKI interne, voir role galaxy configuration-bare-metal
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+| Nom | valeur par defaut | description |
+|-----|-------------------|-------------|
+| centos.docker_proxy | https://artifactory-qualif.sii24.pole-emploi.intra/artifactory/rpm-docker-centos-proxy | Adresse d'un mirroir du repository docker yum |
+| docker.data_root | /data/docker | Répertoire des données de docker : containers, images, volumes etc... |
+| docker.insecure_registries | ["docker-snapshots-virtual.artefact-repo.pole-emploi.intra"] | liste des insecure-registries a configurer |
+| docker.registry_mirrors | ["https://docker-dev-virtual.repository.pole-emploi.intra"] | Liste des registry mirror a configurer |
 
-Dependencies
-------------
-
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
 
 Example Playbook
 ----------------
 
 Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
 
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+  - hosts: all
+    roles:
+    - role: 'docker-bare-metal'
+      tags: docker
+    vars:
+      centos:
+        docker_proxy: https://repository.pole-emploi.intra/artifactory/rpm-docker-centos-proxy
+      docker:
+        data_root: /repertoire/docker
+        insecure_registries:
+          - adresse_1
+          - adresse_2
+        registry_mirrors:
+          - https://adresse_3
 
-License
--------
-
-BSD
-
-Author Information
-------------------
-
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
