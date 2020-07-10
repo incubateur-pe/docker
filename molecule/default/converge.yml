@@ -1,0 +1,11 @@
+---
+- name: Converge
+  hosts: all
+  become: yes
+  tasks:
+    - name: "Include docker-bare-metal"
+      include_role:
+        name: "docker-bare-metal"
+  vars:
+    centos:
+      docker_proxy: https://download.docker.com/linux/centos
