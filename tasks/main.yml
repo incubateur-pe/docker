@@ -12,7 +12,7 @@
 
 - meta: flush_handlers
 
-- name: "Vérifie que docker est démarré"
+- name: "Promets que docker est démarré"
   systemd:
     name: "docker"
     enabled: yes
