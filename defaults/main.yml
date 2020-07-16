@@ -1,7 +1,7 @@
 ---
 # defaults file for docker-bare-metal# defaults file for configuration-bare-metal
 centos:
-  docker_proxy: https://artifactory-qualif.sii24.pole-emploi.intra/artifactory/rpm-docker-centos-proxy
+  docker_proxy: https://repository.pole-emploi.intra/artifactory/rpm-docker-centos-proxy
 
 docker:
   data_root: /data/docker
