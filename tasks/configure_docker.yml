@@ -2,11 +2,13 @@
 - name: Crée les répertoires de docker
   file:
     state: directory
-    path: "{{item}}"
-    mode: 0700
+    path: "{{item.dir}}"
+    mode: "{{item.mode}}"
   with_items:
-    - "{{docker.data_root}}"
-    - /etc/docker
+    - dir: "{{docker.data_root}}"
+      mode: "0711"
+    - dir: /etc/docker
+      mode: "0700"
 
 - name: Dépose la configuration docker
   template:
