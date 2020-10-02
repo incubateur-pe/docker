@@ -13,7 +13,7 @@ Role Variables
 
 | Nom | valeur par defaut | description |
 |-----|-------------------|-------------|
-| centos.docker_proxy | https://artifactory-qualif.sii24.pole-emploi.intra/artifactory/rpm-docker-centos-proxy | Adresse d'un mirroir du repository docker yum |
+| centos.docker_proxy | https://repository.pole-emploi.intra/artifactory/rpm-docker-centos-proxy | Adresse d'un mirroir du repository docker yum |
 | docker.data_root | /data/docker | Répertoire des données de docker : containers, images, volumes etc... |
 | docker.insecure_registries | ["docker-snapshots-virtual.artefact-repo.pole-emploi.intra"] | liste des insecure-registries a configurer |
 | docker.registry_mirrors | ["https://docker-dev-virtual.repository.pole-emploi.intra"] | Liste des registry mirror a configurer |
