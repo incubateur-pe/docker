@@ -1,5 +1,11 @@
 {
     "data-root": "{{docker.data_root}}",
     "insecure-registries": {{ docker.insecure_registries | to_json }},
-    "registry-mirrors": {{ docker.registry_mirrors | to_json }}
+    "registry-mirrors": {{ docker.registry_mirrors | to_json }},
+    "exec-opts": ["native.cgroupdriver=systemd"],
+    "log-driver": "{{ docker.log_driver | default('json-file') }}",
+    "log-opts": {
+      "max-size": "{{docker.log_max_size | default('100m')}}"
+    },
+    "storage-driver": "{{ docker.storage_driver | default ('overlay2')}}"
 }

@@ -17,7 +17,9 @@ Role Variables
 | docker.data_root | /data/docker | Répertoire des données de docker : containers, images, volumes etc... |
 | docker.insecure_registries | ["docker-snapshots-virtual.artefact-repo.pole-emploi.intra"] | liste des insecure-registries a configurer |
 | docker.registry_mirrors | ["https://docker-dev-virtual.repository.pole-emploi.intra"] | Liste des registry mirror a configurer |
-
+| docker.log_driver | json-file | Driver de logs docker |
+| docker.log_max_size | 100m | Taille maximale de la log docker |
+| docker.storage_driver | overlay2 | Driver de stockage docker |
 
 Example Playbook
 ----------------
