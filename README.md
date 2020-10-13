@@ -20,6 +20,7 @@ Role Variables
 | docker.log_driver | json-file | Driver de logs docker |
 | docker.log_max_size | 100m | Taille maximale de la log docker |
 | docker.storage_driver | overlay2 | Driver de stockage docker |
+| docker.native.cgroupdriver | systemd | Driver cgroup (sytemd ou docker) |
 
 Example Playbook
 ----------------
