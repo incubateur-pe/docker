@@ -15,5 +15,5 @@
 - name: "Promets que docker est démarré"
   systemd:
     name: "docker"
-    enabled: yes
+    enabled: true
     state: started
