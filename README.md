@@ -1,26 +1,21 @@
 docker-bare-metal
 =========
 
-Installe docker sur un serveur ou une vm
-
-Pré-requis
-------------
-
-La machine doit disposer des AC de la PKI interne, voir role galaxy configuration-bare-metal
+Install docker on a server
 
 Role Variables
 --------------
 
 | Nom | valeur par defaut | description |
 |-----|-------------------|-------------|
-| centos.docker_proxy | https://repository.pole-emploi.intra/artifactory/rpm-docker-centos-proxy | Adresse d'un mirroir du repository docker yum |
-| docker.data_root | /data/docker | Répertoire des données de docker : containers, images, volumes etc... |
-| docker.insecure_registries | ["docker-snapshots-virtual.artefact-repo.pole-emploi.intra"] | liste des insecure-registries a configurer |
-| docker.registry_mirrors | ["https://docker-dev-virtual.repository.pole-emploi.intra"] | Liste des registry mirror a configurer |
-| docker.log_driver | json-file | Driver de logs docker |
-| docker.log_max_size | 100m | Taille maximale de la log docker |
-| docker.storage_driver | overlay2 | Driver de stockage docker |
-| docker.native.cgroupdriver | systemd | Driver cgroup (sytemd ou docker) |
+| docker_repo | https://download.docker.com/linux/ | Docker repository (or mirror to) containing packages |
+| docker_data_root | /var/lib/docker | Docker data directory  |
+| docker_insecure_registries | [] | Insecure registries to add to docker configuration |
+| docker_registry_mirrors | [] | Registries to configure as mirrors |
+| docker_log_driver | json-file | Docker log driver |
+| docker_log_max_size | 100m | Docker log maximum size |
+| docker_storage_driver | overlay2 | Docker storage driver |
+| docker_native_cgroupdriver | systemd | cgroup driver |
 
 Example Playbook
 ----------------
@@ -32,13 +27,9 @@ Including an example of how to use your role (for instance, with variables passe
     - role: 'docker-bare-metal'
       tags: docker
     vars:
-      centos:
-        docker_proxy: https://repository.pole-emploi.intra/artifactory/rpm-docker-centos-proxy
-      docker:
-        data_root: /repertoire/docker
-        insecure_registries:
-          - adresse_1
-          - adresse_2
-        registry_mirrors:
-          - https://adresse_3
-
+      docker_data_root: /repertoire/docker
+      docker_insecure_registries:
+        - adresse_1
+        - adresse_2
+      docker_registry_mirrors:
+        - https://adresse_3

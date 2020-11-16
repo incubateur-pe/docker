@@ -6,6 +6,7 @@
     - name: "Include docker-bare-metal"
       include_role:
         name: "docker-bare-metal"
-  vars:
-    centos:
-      docker_proxy: https://download.docker.com/linux/centos
+      vars:
+        docker_insecure_registries: "{{ lookup('env', 'INSECURE_REGISTRIES') }}"
+        docker_registry_mirrors: "{{ lookup('env', 'DOCKER_REGISTRY_MIRRORS') }}"
+        docker_allow_forward: true
