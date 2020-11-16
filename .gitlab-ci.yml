@@ -71,4 +71,4 @@ publish:
       - tags
   script:
     - ansible-galaxy login --api-key "${GALAXY_TOKEN}" --github-token "${GITHUB_TOKEN}"
-    - ansible-galaxy import ugiraud docker-bare-metal
+    - ansible-galaxy import incubateur-pe docker
