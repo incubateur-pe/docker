@@ -10,3 +10,11 @@
         docker_insecure_registries: "{{ lookup('env', 'INSECURE_REGISTRIES') }}"
         docker_registry_mirrors: "{{ lookup('env', 'DOCKER_REGISTRY_MIRRORS') }}"
         docker_allow_forward: true
+        docker_repo_valid_ssl: false
+  environment:
+    http_proxy: "{{ lookup('env', 'http_proxy') }}"
+    https_proxy: "{{ lookup('env', 'http_proxy') }}"
+    HTTP_PROXY: "{{ lookup('env', 'HTTP_PROXY') }}"
+    HTTPS_PROXY: "{{ lookup('env', 'HTTPS_PROXY') }}"
+    no_proxy: "{{ lookup('env', 'no_proxy') }}"
+    NO_PROXY: "{{ lookup('env', 'NO_PROXY') }}"
