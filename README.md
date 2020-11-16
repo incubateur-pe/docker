@@ -16,6 +16,10 @@ Role Variables
 | docker_log_max_size | 100m | Docker log maximum size |
 | docker_storage_driver | overlay2 | Docker storage driver |
 | docker_native_cgroupdriver | systemd | cgroup driver |
+| docker_edition | ce | Docker edition to install |
+| docker_enable_edge | false | Enables edge packages |
+| docker_enable_test | false | Enables test packages |
+
 
 Example Playbook
 ----------------

@@ -1,14 +1,21 @@
 ---
-- assert:
-    fail_msg: "Ce role ne prends en charge que CentOS"
-    that:
-      - ansible_distribution == "CentOS"
+- name: Construct repository address
+  set_fact:
+    docker_repo_address: '{{ docker_repo | regex_replace("/$", "") }}/{{ ansible_distribution | lower }}'
 
-- name: Installation de docker
-  include_tasks: installe_docker.yml
+- name: "Set up package manager for {{ ansible_os_family }}"
+  include_tasks: "config_{{ ansible_os_family }}.yml"
 
-- name: Configuration de docker
-  include_tasks: configure_docker.yml
+- name: Install Docker
+  package:
+    name:
+      - "docker-{{ docker_edition }}"
+      - "docker-{{ docker_edition }}-cli"
+      - "containerd.io"
+  notify: restart docker
+
+- name: Docker configuration
+  include_tasks: config_docker.yml
 
 - meta: flush_handlers
 
