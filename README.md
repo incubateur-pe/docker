@@ -19,6 +19,7 @@ Role Variables
 | docker_edition | ce | Docker edition to install |
 | docker_enable_edge | false | Enables edge packages |
 | docker_enable_test | false | Enables test packages |
+| docker_apt_ignore_key_error | true | Ignore errors on gpg key import |
 
 
 Example Playbook
