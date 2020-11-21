@@ -1,7 +1,8 @@
 docker-bare-metal
 =========
 
-Install docker on a server
+Install and configure docker on a server
+If you plan to use anything on your server that needs the forward policy to be set to ACCEPT, this role can configure the DOCKER-USER rule needed
 
 Role Variables
 --------------
@@ -27,16 +28,52 @@ Role Variables
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+Simple docker install:
 
-  - hosts: all
-    roles:
-    - role: 'docker-bare-metal'
-      tags: docker
-    vars:
-      docker_data_root: /repertoire/docker
-      docker_insecure_registries:
-        - adresse_1
-        - adresse_2
-      docker_registry_mirrors:
-        - https://adresse_3
+```yaml
+- hosts: all
+  roles:
+  - role: 'docker-bare-metal'
+```
+
+Install docker and configure some insecure registries and mirrors:
+
+```yaml
+- hosts: all
+  roles:
+  - role: 'docker-bare-metal'
+  vars:
+    docker_data_root: /repertoire/docker
+    docker_insecure_registries:
+      - adresse_1
+      - adresse_2
+    docker_registry_mirrors:
+      - https://adresse_3
+```
+
+
+
+Tests
+-----
+
+The tests use molecule + libvirt + kvm distant + testinfra, allowing on the fly multi-nodes clusters creation and system configuration checks
+
+__Tests execution with docker:__
+```
+# interactive :
+docker run --env-file molecule/common/env_local_tests.sh -v $(pwd):/sources/docker -w /sources/docker   -v ~/.vagrant.d/boxes/:/root/.vagrant.d/boxes/   -v /var/run/libvirt/libvirt-sock:/var/run/libvirt/libvirt-sock -it --entrypoint bash ulrichg/molecule-vagrant-libvirt:latest
+
+# lint:
+docker run --env-file molecule/common/env_local_tests.sh -v $(pwd):/sources/docker -w /sources/docker   -v ~/.vagrant.d/boxes/:/root/.vagrant.d/boxes/   -v /var/run/libvirt/libvirt-sock:/var/run/libvirt/libvirt-sock ulrichg/molecule-vagrant-libvirt:latest lint
+
+# default scenario:
+docker run --env-file molecule/common/env_local_tests.sh -v $(pwd):/sources/docker -w /sources/docker   -v ~/.vagrant.d/boxes/:/root/.vagrant.d/boxes/   -v /var/run/libvirt/libvirt-sock:/var/run/libvirt/libvirt-sock ulrichg/molecule-vagrant-libvirt:latest
+
+# other scenario:
+docker run --env-file molecule/common/env_local_tests.sh -v $(pwd):/sources/docker -w /sources/docker   -v ~/.vagrant.d/boxes/:/root/.vagrant.d/boxes/   -v /var/run/libvirt/libvirt-sock:/var/run/libvirt/libvirt-sock ulrichg/molecule-vagrant-libvirt:latest test -s cluster1master
+```
+
+License
+-------
+
+BSD 3-Clause
