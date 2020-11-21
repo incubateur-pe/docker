@@ -21,7 +21,8 @@ Role Variables
 | docker_enable_test | false | Enables test packages |
 | docker_apt_ignore_key_error | true | Ignore errors on gpg key import |
 | docker_users | [] | List of users to add to docker group |
-
+| docker_allow_forward | false | Configure iptables rules to allow forward, as docker set it to DROP |
+| docker_repo_valid_ssl | true | Set to false to use a repository with for example a self signed certifcate |
 
 Example Playbook
 ----------------
