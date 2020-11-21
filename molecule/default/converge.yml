@@ -3,9 +3,9 @@
   hosts: all
   become: true
   tasks:
-    - name: "Include docker-bare-metal"
+    - name: "Include docker"
       include_role:
-        name: "docker-bare-metal"
+        name: "docker"
       vars:
         docker_insecure_registries: "{{ lookup('env', 'INSECURE_REGISTRIES') }}"
         docker_registry_mirrors: "{{ lookup('env', 'DOCKER_REGISTRY_MIRRORS') }}"
